@@ -1,0 +1,266 @@
+
+// ONE dark UI colors
+// ----------------------------------------------
+
+@import "syntax-variables";
+@import "config-variables";
+.ui-syntax-color() { @syntax-background-color: hsl(220,24%,20%); } .ui-syntax-color(); // fallback color
+@ui-syntax-color: @syntax-background-color;
+
+// Color guards -----------------
+@ui-s-h: hue(@ui-syntax-color);
+@ui-s-s: saturation(@ui-syntax-color);
+@ui-s-l: unit(lightness(@ui-syntax-color))/100;
+@ui-inv: 0.1; // inverse lightness if below
+
+.ui-hue() when (@ui-s-s = 0) { @ui-hue: 220; } // Use blue hue when no saturation
+.ui-hue() when (@ui-s-s > 0) { @ui-hue: @ui-s-h; }
+.ui-hue();
+
+.ui-saturation() when (@ui-s-h <=  80) { @ui-saturation: min(@ui-s-s,  5%); } // minimize saturation for brown
+.ui-saturation() when (@ui-s-h >   80) and (@ui-s-h <  160) { @ui-saturation: min(@ui-s-s, 12%); } // reduce saturation for green
+.ui-saturation() when (@ui-s-h >= 160) and (@ui-s-l <  @ui-inv) { @ui-saturation: min(@ui-s-s, 48%); } // limit max saturation for very dark backgrounds
+.ui-saturation() when (@ui-s-h >= 160) and (@ui-s-l >= @ui-inv) { @ui-saturation: @ui-s-s; }
+.ui-saturation();
+
+.ui-lightness() when (@ui-s-l <  @ui-inv) {
+  @ui-lightness: @ui-s-l ;
+  @ui-lightness-border: @ui-lightness*.3;
+}
+.ui-lightness() when (@ui-s-l >= @ui-inv) {
+  @ui-lightness: @ui-s-l - 0.08;
+  @ui-lightness-border: @ui-lightness*.6;
+}
+.ui-lightness();
+
+// Main colors -----------------
+// @ui-fg:     hsl(@ui-hue, min(@ui-saturation, 18%), max(@ui-lightness*3, 66%) );
+
+// .ui-fg_() when (@ui-s-l > 50%)    { @ui-fg: hsl(@ui-hue, min(@ui-saturation, 18%), min((1 - @ui-lightness)*3, 33%)); }
+.ui-fg_() when (default())        { @ui-fg: hsla(@ui-hue, min(@ui-saturation, 18%), 1, max(@ui-lightness*3, 60%));}
+.ui-fg_();
+
+.ui-bg_() when (@cfg-bg = "auto") { @ui-bg: hsl(@ui-hue, @ui-saturation, @ui-lightness); }
+.ui-bg_() when (default())        { @ui-bg: @cfg-bg;                                     }
+.ui-bg_();
+
+// @ui-bg: @syntax-background-color;
+// @ui-border: darken(@ui-bg,0%); //hsl(@ui-hue, @ui-saturation, @ui-lightness-border);
+@ui-border: hsl(@ui-hue, @ui-saturation, @ui-lightness-border);
+@border-width: 4px;
+@status-bar-border: 0px;
+// Custom variables
+// These variables are only used in this theme
+// ----------------------------------------------
+
+@ui-theme-name: one-dark-ui;
+
+// Text (Custom) -----------------
+@text-color-faded: fade(@text-color, 20%);
+
+@text-color-added:    @text-color-success;  // green
+@text-color-ignored:  @text-color-subtle;   // faded
+@text-color-modified: @text-color-warning;  // orange
+@text-color-removed:  @text-color-error;    // red
+@text-color-renamed:  @text-color-info;     // blue
+
+
+// Background (Custom) -----------------
+
+// Very small elements, like backgrounds of checkboxes
+@next-tiny-layer-color:     hsla(@ui-hue, @ui-saturation, 1, 0.12);
+
+// Smaller elements, like buttons
+@next-layer-color:          hsla(@ui-hue, @ui-saturation, 1, 0.08);
+@next-layer-color-hover:    hsla(@ui-hue, @ui-saturation, 1, 0.03);
+@next-layer-color-selected: hsla(@ui-hue, @ui-saturation, 1, 0.06);
+
+// Bigger elements, like panel background
+@next-level-color:          hsla(@ui-hue, @ui-saturation, 1, 0.04);
+@next-level-color-hover:    hsla(@ui-hue, @ui-saturation, 1, 0.06);
+@next-level-color-disabled: hsla(@ui-hue, @ui-saturation, 1, 0.02);
+
+// @next-level-color-on-bg: fade(mix(@base-background-color, fade(@next-level-color, 100%), alpha (@next-level-color)),100%);
+@next-level-color-on-bg: fade(mix(fade(@next-level-color, 100%), @base-background-color, alpha(@next-level-color)*100),100%);
+
+// We need to keep level-x-color, because third-party plugins use them
+@level-1-color: @next-level-color;
+@level-2-color: @next-level-color;
+@level-3-color: @next-level-color;
+@tool-bar-color: darken(@base-background-color,0%);
+
+@status-bar-color:        @ui-border;
+@status-bar-color-hover:  lighten(@status-bar-color     ,6%);
+@status-bar-color-active: lighten(@status-bar-color     ,3%);
+
+@card-color:          lighten(@base-background-color, 4%);
+@card-color-hover:    lighten(@card-color, 2%);
+@card-color-disabled: fade(@card-color, 60%);
+
+// @level-3-color-hover:  @red;//lighten(@level-3-color, 6%);
+// @level-3-color-active: @red;//lighten(@level-3-color, 3%);
+
+
+
+
+// Accent (Custom) -----------------
+@accent-luma:             luma( hsl(@ui-hue, 50%, 50%) ); // get lightness of current hue
+
+// used for marker, inputs (smaller things)
+// @accent-color:            mix( hsv( @ui-hue, 100%, 66%), hsl( @ui-hue, 50%, 50%), @accent-luma ); // mix hsv + hsl (favor mostly hsl)
+@accent-layer-color:      hsla( @ui-hue, 100%, 60%, 65%);
+@accent-color-wide:       hsla( @ui-hue, 90%, 60%, 65%); // accent for bigger elements, like file modification dot
+@accent-color-subtle:     hsla( @ui-hue, 90%, 65%, 60%); // accent for bigger elements, like file modification dot
+@accent-text-color:       contrast(@accent-color, hsl(@ui-hue,100%,10%), #fff, 25% );
+
+@accent-subtle-text-on-color: contrast(@accent-color-subtle, white, hsl(0,0%,0%), 33% );
+
+// used for button, tooltip (larger things)
+@accent-bg-layer-color:   @accent-color-wide; //desaturate(darken(@accent-color,0%),10%);
+// @accent-bg-color:         mix( hsv( @ui-hue, 66%, 66%), hsl( @ui-hue, 66%, 60%), @accent-luma * 2 ); // mix hsv + hsl (favor hsl for dark, hsv for light colors)
+@accent-bg-text-color:    #000000;//contrast(@accent-bg-color, hsl(@ui-hue,100%,10%), #fff, 30% );
+
+// used for text only
+@accent-only-text-color: mix( hsv( @ui-hue, 100%, 66%), hsl( @ui-hue, 100%, 77%), @accent-luma ); // mix hsv + hsl (favor mostly hsl)
+
+
+@accent-color:           mix(fade(@accent-layer-color,100%), @base-background-color, alpha(@accent-layer-color) * 100);
+@accent-bg-color:        mix(fade(@accent-layer-color,100%), @base-background-color, alpha(@accent-bg-layer-color) * 100);
+
+
+// Components (Custom) -----------------
+@badge-background-color:            lighten(@background-color-highlight, 6%);
+
+@button-text-color-selected:        @accent-bg-text-color;
+@button-border-color-selected:      @base-border-color;
+
+@checkbox-background-color:         fade(@accent-bg-color, 33%);
+
+@input-background-color-focus:      mix(@accent-bg-color, @input-background-color, 10%);
+@input-selection-color:             mix(@accent-color, @input-background-color, 25%);
+@input-selection-color-focus:       mix(@accent-color, @input-background-color, 50%);
+
+@overlay-backdrop-color:            #000000; //hsl(@ui-hue,@ui-saturation,10%);
+@overlay-backdrop-opacity:          .8;
+
+@progress-background-color:         @accent-color;
+
+@scrollbar-color:                   @next-layer-color;
+@scrollbar-color-hover:             @next-layer-color-hover;
+@scrollbar-background-color:        transparent;
+@scrollbar-color-editor:            @next-layer-color;
+@scrollbar-background-color-editor: @ui-syntax-color;
+
+
+@tab-text-color:                    @text-color-subtle;
+@tab-text-color-active:             @text-color;
+@tab-text-color-editor:             @text-color; // contrast(@ui-syntax-color, darken(@ui-syntax-color, 50%), @text-color-highlight );
+@tab-background-color-editor:       @ui-syntax-color;
+
+@tree-view-background-selected-color: lighten(@level-3-color, 5%);
+
+@tooltip-background-color:          @accent-bg-color;
+@tooltip-text-color:                @accent-bg-text-color;
+@tooltip-text-key-color:            @tooltip-background-color;
+@tooltip-background-key-color:      @tooltip-text-color;
+
+
+// Sizes (Custom) -----------------
+
+@ui-size:                 1em;
+@ui-input-size:           @ui-size*1.15;
+@ui-padding:              19px;//@ui-size*1.5;
+@ui-padding-pane:         @ui-size*.5;
+@ui-padding-icon:         @ui-padding/3.3;
+@ui-line-height:          @ui-size*2;
+@ui-tab-height:           @ui-size*3.0;
+@ui-tab-padding:          @ui-size*1.0;
+@ui-status-bar-height:    @ui-size*2.5;
+
+@menu-item-margin: 20px;
+
+
+@icon-offset: 0.35;
+.icon-style             (@scale:1.5) { .icon-style-for(@font-size            , @scale); }
+.icon-style-section     (@scale:1.5) { .icon-style-for(@font-size-section    , @scale); }
+.icon-style-description (@scale:1.5) { .icon-style-for(@font-size-description, @scale); }
+.icon-style-for(@fs, @scale:1.5) { &::before {
+  @fss:         round(@fs*@scale);
+  font-size:    @fss;
+  width:        @fss;
+  height:       @fss;
+  top:          floor((@fss - @fs - 1)/2);
+  margin-right: round(@fss * @icon-offset);
+}}
+
+
+@options-padding:             round(@ui-padding * 1.0);
+@options-description-padding: round(@ui-padding * 0.2);
+@section-desc-padding:        round(@ui-padding * 1.0);
+@section-body-padding:        round(@ui-padding * 2.0);
+@sub-section-padding:         round(@ui-padding * 3.5);
+@title-margin:                round(@ui-padding * 0.7);
+@section-side-padding:        round(@ui-padding * 2.5);
+@description-margin:          round(@ui-padding * 0.7);
+@panel-padding:               round(@ui-padding * 2.0);
+@max-settings-width: 600px;
+
+body, atom-workspace {
+  font-size: @font-size;
+  font-weight: normal;
+  letter-spacing: 0.5px;
+}
+
+// Packages variables
+// These variables are used to override packages
+// ----------------------------------------------
+
+@settings-list-background-color: darken(@next-layer-color, 1.5%);
+@theme-config-box-shadow: inset 0 0 3px hsla(0, 0%, 100%, .4), 0 1px 3px hsla(0, 0%, 0%, .2);
+@theme-config-box-shadow-selected: inset 0 1px 3px hsla(0, 0%, 0%, .1);
+@theme-config-border-selected: hsla(0, 0%, 100%, .75);
+
+
+
+// Debug
+// Output variables to the top of the UI
+// -------------------------------------
+
+// html:before {
+//   content: "@{variable}";
+// }
+
+// Offsets
+// These variables are used to override packages
+// ----------------------------------------------
+
+
+@section-offset:        0.7em;
+// @icon-offset:           0.7em;
+@secondary-info-offset: 0.4em; // like package-card version info
+
+
+
+@btn-border-radius:  8px;
+@card-border-radius: 40px;
+@input-radius: 100px;
+
+// Checkboxes
+// These variables are used to override packages
+// ----------------------------------------------
+
+@basic-spacing: 0.8em;
+
+// @switch-on-color:  hsl(65, 30%, 47%);
+// @switch-on-color:  hsl(0,0%,40%);//@accent-color-subtle;
+@switch-on-color:  @accent-color-subtle;
+@switch-off-color: @next-tiny-layer-color;
+
+@switch-width:        2.8em;
+@switch-height:       1.4em;
+@switch-toggle-scale: 0.7;
+@switch-roundness:    1.0;
+
+@switch-toggle-size:    @switch-height * @switch-toggle-scale;
+@switch-toggle-margin:  (@switch-height - @switch-toggle-size) / 2;
+@switch-toggle-padding: @switch-width + @basic-spacing;

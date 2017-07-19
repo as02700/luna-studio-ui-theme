@@ -1,0 +1,123 @@
+@tree-view-height: @ui-line-height;
+
+
+.tree-view {
+  & {
+    .file.list-item:not(.opened),
+    .directory:not(.opened) > div  {
+        opacity:0.3;
+        transition: opacity 0.2s
+    }
+  }
+  .selected {
+    color: @text-color;
+  }
+  &:hover {
+    .file.list-item:not(.opened),
+    .directory:not(.opened) > div  {
+        opacity:0.5;
+        transition: opacity 0.2s;
+        &:hover {
+          opacity:0.7;
+          transition: opacity 0.2s;
+        }
+    }
+  }
+
+}
+
+.tree-view {
+
+  font-size: @ui-size;
+  background: @tree-view-background-color;
+
+  & > .list-tree {
+    padding-left: 1em;
+  }
+
+  .project-root.project-root {
+    &:before {
+      height: @ui-tab-height;
+      background-clip: padding-box;
+    }
+    & > .header .name {
+      line-height: @ui-tab-height;
+    }
+  }
+  
+  .selected:before {
+    background: @tree-view-background-selected-color;
+  }
+}
+
+// We assume that tree view is on the left side
+// There is no way to discover tree-view using available selectors
+.atom-dock-inner.left .tab-bar {
+  display: none!important;
+}
+
+
+// .tree-view:hover{
+//   .file.list-item:not(.opened)   {
+//     opacity:1.0;
+//   }
+//   .directory:not(.opened) > div  {
+//     opacity:1.0;
+//   }
+// }
+
+.theme-one-dark-ui .tree-view .project-root.project-root::before {
+  border-top: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+.tree-view-resizer {
+  .tree-view-resize-handle {
+    width: 8px;
+  }
+}
+
+// Variable height, based on ems
+.list-group li:not(.list-nested-item),
+.list-tree li:not(.list-nested-item),
+.list-group li.list-nested-item > .list-item,
+.list-tree li.list-nested-item > .list-item {
+  line-height: @tree-view-height;
+}
+
+.list-group .selected::before,
+.list-tree .selected::before {
+  height: @tree-view-height;
+}
+
+// icon
+.list-group .icon,
+.list-tree .icon {
+  display: inline-block;
+  height: inherit;
+  &::before {
+    top: initial;
+    line-height: inherit;
+    height: inherit;
+    vertical-align: top;
+  }
+}
+
+// Active tree-view marker --------------
+
+.tree-view::before {
+  content: "";
+  position: fixed;
+  pointer-events: none;
+  z-index: 1;
+  height: @ui-tab-height;
+  width: 2px;
+  // background: @accent-color;
+  opacity: 0;
+  transition: opacity .16s;
+}
+
+.tree-view:focus::before {
+  opacity: 1;
+  transition-duration: .32s;
+}
