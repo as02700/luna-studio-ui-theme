@@ -67,26 +67,51 @@
 
 // Background (Custom) -----------------
 
+@level-alpha:          0.05;
+@level-hover-alpha:    0.04;
+@level-selected-alpha: 0.04;
+@level-disabled-alpha: 0.02;
+@bg-level-mult:        0.80;
+
+@layer-alpha:          @level-alpha;
+@layer-hover-alpha:    @level-alpha + @level-hover-alpha;
+@layer-selected-alpha: @layer-hover-alpha + @level-selected-alpha;
+@layer-disabled-alpha: @level-disabled-alpha;
+
+@layer-bg-alpha:          @bg-level-mult * @layer-alpha;
+@layer-bg-hover-alpha:    @bg-level-mult * @layer-hover-alpha;
+@layer-bg-selected-alpha: @bg-level-mult * @layer-selected-alpha;
+@layer-bg-disabled-alpha: @bg-level-mult * @layer-disabled-alpha;
+
 // Very small elements, like backgrounds of checkboxes
-@next-tiny-layer-color:     hsla(@ui-hue, @ui-saturation, 1, 0.12);
+@tiny-layer-color:     #ff0000; //hsla(@ui-hue, @ui-saturation, 1, 0.12);
+
+@this-layer-color-hover:    hsla(@ui-hue, @ui-saturation, 1, @level-hover-alpha);
+@this-layer-color-selected: hsla(@ui-hue, @ui-saturation, 1, @level-hover-alpha + @level-selected-alpha);
 
 // Smaller elements, like buttons
-@next-layer-color:          hsla(@ui-hue, @ui-saturation, 1, 0.08);
-@next-layer-color-hover:    hsla(@ui-hue, @ui-saturation, 1, 0.03);
-@next-layer-color-selected: hsla(@ui-hue, @ui-saturation, 1, 0.06);
+@layer-color:          hsla(@ui-hue, @ui-saturation, 1, @layer-alpha);
+@layer-hover-color:    hsla(@ui-hue, @ui-saturation, 1, @layer-hover-alpha);
+@layer-selected-color: hsla(@ui-hue, @ui-saturation, 1, @layer-selected-alpha);
+@layer-disabled-color: hsla(@ui-hue, @ui-saturation, 1, @layer-disabled-alpha);
 
-// Bigger elements, like panel background
-@next-level-color:          hsla(@ui-hue, @ui-saturation, 1, 0.04);
-@next-level-color-hover:    hsla(@ui-hue, @ui-saturation, 1, 0.06);
-@next-level-color-disabled: hsla(@ui-hue, @ui-saturation, 1, 0.02);
+// bigger elements, like card backgrounds
+@layer-bg-color:          hsla(@ui-hue, @ui-saturation, 1, @layer-bg-alpha);
+@layer-bg-hover-color:    hsla(@ui-hue, @ui-saturation, 1, @layer-bg-hover-alpha);
+@layer-bg-selected-color: hsla(@ui-hue, @ui-saturation, 1, @layer-bg-selected-alpha);
+@layer-bg-disabled-color: hsla(@ui-hue, @ui-saturation, 1, @layer-bg-disabled-alpha);
 
-// @next-level-color-on-bg: fade(mix(@base-background-color, fade(@next-level-color, 100%), alpha (@next-level-color)),100%);
-@next-level-color-on-bg: fade(mix(fade(@next-level-color, 100%), @base-background-color, alpha(@next-level-color)*100),100%);
+
+@level-color:          hsla(@ui-hue, @ui-saturation, 1, @level-alpha);
+@level-hover-color:    hsla(@ui-hue, @ui-saturation, 1, @level-hover-alpha);
+@level-disabled-color: hsla(@ui-hue, @ui-saturation, 1, @level-selected-alpha);
+
+@level-on-bg-color: fade(mix(fade(@level-color, 100%), @base-background-color, alpha(@level-color)*100),100%);
 
 // We need to keep level-x-color, because third-party plugins use them
-@level-1-color: @next-level-color;
-@level-2-color: @next-level-color;
-@level-3-color: @next-level-color;
+@level-1-color: @level-color;
+@level-2-color: @level-color;
+@level-3-color: @level-color;
 @tool-bar-color: darken(@base-background-color,0%);
 
 @status-bar-color:        @ui-border;
@@ -145,10 +170,10 @@
 
 @progress-background-color:         @accent-color;
 
-@scrollbar-color:                   @next-layer-color;
-@scrollbar-color-hover:             @next-layer-color-hover;
+@scrollbar-color:                   @layer-color;
+@scrollbar-color-hover:             @layer-hover-color;
 @scrollbar-background-color:        transparent;
-@scrollbar-color-editor:            @next-layer-color;
+@scrollbar-color-editor:            @layer-color;
 @scrollbar-background-color-editor: @ui-syntax-color;
 
 
@@ -237,7 +262,7 @@ body, atom-workspace {
 // These variables are used to override packages
 // ----------------------------------------------
 
-@settings-list-background-color: darken(@next-layer-color, 1.5%);
+@settings-list-background-color: darken(@layer-color, 1.5%);
 @theme-config-box-shadow: inset 0 0 3px hsla(0, 0%, 100%, .4), 0 1px 3px hsla(0, 0%, 0%, .2);
 @theme-config-box-shadow-selected: inset 0 1px 3px hsla(0, 0%, 0%, .1);
 @theme-config-border-selected: hsla(0, 0%, 100%, .75);
@@ -276,7 +301,7 @@ body, atom-workspace {
 // @switch-on-color:  hsl(65, 30%, 47%);
 // @switch-on-color:  hsl(0,0%,40%);//@accent-color-subtle;
 @switch-on-color:  @accent-color-subtle;
-@switch-off-color: @next-tiny-layer-color;
+@switch-off-color: @tiny-layer-color;
 
 @switch-width:        2.8em;
 @switch-height:       1.4em;

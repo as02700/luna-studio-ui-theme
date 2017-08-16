@@ -20,11 +20,11 @@
 			border-radius: @btn-border-radius;
 			&:hover {
 				.icon { .colorAll (@text-color-subtle-hover); }
-				background-color: @next-layer-color-hover;
+				background-color: @this-layer-color-hover;
 			}
 			&.active { &, &:hover {
 				.icon { .colorAll (@text-color); }
-				background: @next-layer-color;
+				background: @this-layer-color-selected;
 			}}
 			.icon {
 				padding:     0;
@@ -82,16 +82,13 @@
 	    &.section-heading, &.sub-section-heading {
 				font-size: @font-size-section;
 				font-weight: 200;
-				.icon-style-section-hack;
+				.icon-style-section-hack; // FIXME: Why we need to use hack here?
 	      .badge {
 	        margin-left: 10px;
 					font-size: 15px;
 	        color: @text-color-secondary;
-					background: @next-level-color;
+					background: @level-color;
 	      }
-				// &::before{
-				// 	vertical-align: middle;
-				// }
 	    }
 	  }
 	}
@@ -113,11 +110,11 @@
 		border:        0;
 		border-radius: 0;
 		padding:       @ui-padding;
-		background:    @next-level-color;
+		background:    @layer-color;
 		margin-bottom: 3px;
 
-		&:hover    { background: @next-level-color-hover;    }
-    &.disabled { background: @next-level-color-disabled; }
+		&:hover    { background: @layer-hover-color;    }
+    &.disabled { background: @layer-disabled-color; }
 
 		.package-description {
 			display: block;
@@ -147,7 +144,7 @@
 		.section {margin-top: 0;}
 		.package-container {
 	    margin-bottom: 20px;
-	    .package-card:hover { background: @next-level-color; }
+	    .package-card:hover { background: @layer-color; }
     }
 		.breadcrumb {
 			padding: 0;
@@ -211,7 +208,7 @@
 			// background: @base-background-color;
 			border: none;
 		}
-		tr:nth-child(even) { background-color: @next-level-color-disabled;}
+		tr:nth-child(even) { background-color: @level-disabled-color;}
 	}
 
 
@@ -251,7 +248,7 @@
 	.editor-container {
 		margin: @ui-padding 0;
     .editor {
-      background: @next-level-color;
+      background: @level-color;
       border-radius: 1em;
       border:none;
       .placeholder-text {
@@ -269,9 +266,9 @@
 		padding-bottom: 0;
     border-radius: 1em;
 		// TODO: vvv why we need important here? without it SOMETIMES it does not work
-    background: @next-level-color-on-bg!important;
+    background: @level-on-bg-color!important;
     &:active, &:hover {
-			background: @next-level-color-on-bg!important;
+			background: @level-on-bg-color!important;
 			outline-color: @red!important;
 		}
     :focus {
@@ -303,7 +300,7 @@
 				// height: 2em;
 			}
 			:last-child {
-				background: @next-layer-color;
+				background: @layer-color;
 				border-radius: 0 2em 2em 0;
 				height: 2.35em; // TODO: Why the value is so strange here? The above setting sets 2em to the left controller.
 				margin: 1px 0 0 0;
@@ -344,11 +341,11 @@
 					height: @switch-height;
 					width: 0;
 					border-radius: 0;
-					// background-color: @next-layer-color;
+					// background-color: @layer-color;
 
 					cursor: pointer;
 	        // box-shadow: makelongshadow(@red, -8px);
-					box-shadow: -400px 0 0 400px @next-layer-color;
+					box-shadow: -400px 0 0 400px @layer-color;
 				}
 			}
 
@@ -356,7 +353,7 @@
 			  width: 100%;
 			  height: @switch-height;
 			  cursor: pointer;
-			  background: @next-layer-color;
+			  background: @layer-color;
 			  border-radius: @switch-roundness * @switch-height / 2;
 			  // border: 0.2px solid #010101;
 			}
@@ -474,7 +471,7 @@
 	.alert {
 		padding: 1em 1em 1em 1em;
 		border-radius: 1em;
-		background: @next-layer-color;
+		background: @layer-color;
 		&, &::before { color: @text-color; }
 
 		// beginning of errors (like pkg fetching error) use this class ...
