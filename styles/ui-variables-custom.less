@@ -180,18 +180,40 @@
 @menu-item-margin: 20px;
 
 
-@icon-offset: 0.35;
+@icon-offset: 0.4;
 .icon-style             (@scale:1.5) { .icon-style-for(@font-size            , @scale); }
 .icon-style-section     (@scale:1.5) { .icon-style-for(@font-size-section    , @scale); }
 .icon-style-description (@scale:1.5) { .icon-style-for(@font-size-description, @scale); }
-.icon-style-for(@fs, @scale:1.5) { &::before {
-  @fss:         round(@fs*@scale);
-  font-size:    @fss;
-  width:        @fss;
-  height:       @fss;
-  top:          floor((@fss - @fs - 1)/2);
-  margin-right: round(@fss * @icon-offset);
-}}
+.icon-style-for(@fs, @scale:1.5) {
+  @fss: round(@fs*@scale);
+  &::before {
+    font-size:    @fss;
+    width:        @fss;
+    height:       @fss;
+    line-height:  @fss;
+    top:          0;//floor((@fss - @fs - 1)/2);
+    margin-right: round(@fss * @icon-offset);
+    vertical-align: middle;
+  }
+}
+
+.icon-style-hack             (@scale:1.5) { .icon-style-for-hack(@font-size            , @scale); }
+.icon-style-section-hack     (@scale:1.5) { .icon-style-for-hack(@font-size-section    , @scale); }
+.icon-style-description-hack (@scale:1.5) { .icon-style-for-hack(@font-size-description, @scale); }
+.icon-style-for-hack(@fs, @scale:1.5) {
+  @fss: round(@fs*@scale);
+  line-height: @fss; // why we need it?
+  &::before {
+    font-size:    @fss;
+    width:        @fss;
+    height:       @fss;
+    line-height:  @fss;
+    top:          0;//floor((@fss - @fs - 1)/2);
+    margin-right: round(@fss * @icon-offset);
+    vertical-align: bottom; // why bottom works?
+  }
+}
+
 
 
 @options-padding:             round(@ui-padding * 1.0);

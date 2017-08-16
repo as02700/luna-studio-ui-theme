@@ -1,24 +1,3 @@
-
-// Settings
-
-// Modular Scale (1.125): http://www.modularscale.com/?1&em&1.125&web&table
-@ms-6: @ui-size * 2.027;
-@ms-5: @ui-size * 1.802;
-@ms-4: @ui-size * 1.602;
-@ms-3: @ui-size * 1.424;
-@ms-2: @ui-size * 1.266;
-@ms-1: @ui-size * 1.125;
-@ms-0: @ui-size * 1;
-@ms_1: @ui-size * 0.889;
-@ms_2: @ui-size * 0.790;
-
-//
-// .scrollbars-visible-always ::-webkit-scrollbar-track {
-//     background: @red !important;
-// }
-
-
-
 @menu-item-offset: @menu-item-margin * 2 + @font-size;
 
 .settings-view {
@@ -30,8 +9,8 @@
 	.config-menu {
 		position:    relative;
     margin-left: @panel-padding;
-		min-width:   @ui-size * 14;
-		max-width:   @ui-size * 20;
+		min-width:   @ui-size * 14; // FIXME
+		max-width:   @ui-size * 20; // FIXME
 		background:  none;
 		border:      0;
 		padding:     0;
@@ -48,10 +27,10 @@
 				background: @next-layer-color;
 			}}
 			.icon {
-				font-size: @font-size;
+				padding:     0;
+				font-size:   @font-size;
 				margin-left: @menu-item-margin;
 				line-height: @menu-item-offset;
-				padding:     0 0;
 				background:  none !important;
 				.icon-style;
 				.colorAll(@text-color-subtle);
@@ -81,7 +60,7 @@
 	// === Sections ===
 	// ================
 
-	.panels-item > .section:first-child { margin-top: -10px; }
+	.panels-item > .section:first-child { margin-top: 0px; }
 	.sub-section     { margin-top: @sub-section-padding;  }
 	.panels .section { &, &.settings-panel { border: 0; } }
 
@@ -103,13 +82,16 @@
 	    &.section-heading, &.sub-section-heading {
 				font-size: @font-size-section;
 				font-weight: 200;
-				.icon-style-section;
+				.icon-style-section-hack;
 	      .badge {
 	        margin-left: 10px;
 					font-size: 15px;
 	        color: @text-color-secondary;
 					background: @next-level-color;
 	      }
+				// &::before{
+				// 	vertical-align: middle;
+				// }
 	    }
 	  }
 	}
@@ -509,3 +491,23 @@
 	}
 
 }
+
+
+
+// Settings
+
+// Modular Scale (1.125): http://www.modularscale.com/?1&em&1.125&web&table
+// @ms-6: @ui-size * 2.027;
+// @ms-5: @ui-size * 1.802;
+// @ms-4: @ui-size * 1.602;
+// @ms-3: @ui-size * 1.424;
+// @ms-2: @ui-size * 1.266;
+// @ms-1: @ui-size * 1.125;
+// @ms-0: @ui-size * 1;
+// @ms_1: @ui-size * 0.889;
+// @ms_2: @ui-size * 0.790;
+
+//
+// .scrollbars-visible-always ::-webkit-scrollbar-track {
+//     background: @red !important;
+// }
