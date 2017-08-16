@@ -26,7 +26,6 @@ module.exports =
     """
 
   refreshTheme: () ->
-    console.log("REFRESH")
     fs.writeFileSync @getConfigVariablesPath(), @getConfigVariablesContent()
 
   activate: (state) ->
