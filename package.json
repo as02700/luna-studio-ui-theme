@@ -16,6 +16,8 @@
   },
   "devDependencies": {
     "coffeelint": "^1.9.7"
+  },
+  "dependencies": {
   }
 
 }

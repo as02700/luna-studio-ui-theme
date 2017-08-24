@@ -1,7 +1,6 @@
 fs   = require 'fs'
 path = require 'path'
 {CompositeDisposable} = require 'atom'
-
 root = document.documentElement
 
 `
