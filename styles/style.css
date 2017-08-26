@@ -25,7 +25,7 @@ atom-workspace {
             color: fade(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4))), (100 * (alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4)))) + 0.04)));
           }
         }
-        background-color: fade(rgba(255,255,255,0), (100 * (alpha(rgba(255,255,255,0)) + 0.04)));
+        background-color: fade(fade(rgba(255,255,255,1), 0), (100 * (alpha(fade(rgba(255,255,255,1), 0)) + 0.04)));
       }
       &.active {
         &, &:hover {
@@ -35,7 +35,7 @@ atom-workspace {
               color: rgba(255,255,255,0.6);
             }
           }
-          background: fade(rgba(255,255,255,0), (100 * (alpha(rgba(255,255,255,0)) + 0.08)));
+          background: fade(fade(rgba(255,255,255,1), 0), (100 * (alpha(fade(rgba(255,255,255,1), 0)) + 0.06)));
         }
       }
       .icon {
@@ -93,7 +93,7 @@ atom-workspace {
 }
 .settings-view {
   .panels-item > .section:first-child {
-    margin-top: 0;
+    margin-top: 5px;
   }
   .sub-section {
     margin-top: 60px;
@@ -1326,19 +1326,19 @@ atom-text-editor .gutter .line-number {
   &.git-line-added {
     transition: color 0.3s;
     border-left: 2px solid transparent;
-    color: fade(#b5bd68, 50);
+    color: fade(#eafe5e, 50);
     &.cursor-line {
       transition: color 0.3s;
-      color: fade(#b5bd68, 80);
+      color: fade(#eafe5e, 80);
     }
   }
   &.git-line-modified {
     transition: color 0.3s;
     border-left: 2px solid transparent;
-    color: fade(#de935f, 50);
+    color: fade(#fbd971, 50);
     &.cursor-line {
       transition: color 0.3s;
-      color: fade(#de935f, 80);
+      color: fade(#fbd971, 80);
     }
   }
   &.git-line-removed:before {
@@ -1420,16 +1420,61 @@ atom-text-editor atom-text-editor-minimap {
     background-clip: content-box;
   }
 }
-atom-notification {
-  &.error, &.fatal {
+atom-notifications atom-notification {
+  &.error {
+    &.icon::before {
+      background-color: mix(rgba(0,0,0,1), #d13b2e, 20);
+    }
+    .content {
+      background-color: mix(rgba(0,0,0,1), #d13b2e, 20);
+    }
+  }
+  &.fatal {
+    &.icon::before {
+      background-color: mix(rgba(0,0,0,1), #d13b2e, 20);
+    }
+    .content {
+      background-color: mix(rgba(0,0,0,1), #d13b2e, 20);
+    }
+  }
+  &.warning {
+    &.icon::before {
+      background-color: mix(rgba(0,0,0,1), #e29433, 20);
+    }
+    .content {
+      background-color: mix(rgba(0,0,0,1), #e29433, 20);
+    }
+  }
+  &.info {
+    &.icon::before {
+      background-color: mix(rgba(0,0,0,1), #339ae2, 24);
+    }
+    .content {
+      background-color: mix(rgba(0,0,0,1), #339ae2, 24);
+    }
+  }
+  &.success {
+    &.icon::before {
+      background-color: mix(rgba(0,0,0,1), #a7cb30, 20);
+    }
+    .content {
+      background-color: mix(rgba(0,0,0,1), #a7cb30, 20);
+    }
+  }
+  &.error, &.fatal, &.warning, &.info, &.success {
     &::before {
-      width: 40px;
+      padding-top: 12px;
+      width: 40px !important;
       border-radius: 15px 0 0 15px;
     }
     .btn.close-all {
       border: 0;
       color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08)));
       background-color: fade(rgba(255,255,255,0.05), (100 * (alpha(rgba(255,255,255,0.05)) + 0.08)));
+      &:hover {
+        color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08)));
+        background-color: fade(fade(rgba(255,255,255,0.05), (100 * (alpha(rgba(255,255,255,0.05)) + 0.08))), (100 * (alpha(fade(rgba(255,255,255,0.05), (100 * (alpha(rgba(255,255,255,0.05)) + 0.08)))) + 0.08)));
+      }
     }
     .close.icon {
       color: rgba(255,255,255,1);
@@ -1438,7 +1483,6 @@ atom-notification {
       padding: 10px;
       border-radius: 0 15px 15px 0;
       color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08)));
-      background-color: #d13b2e;
       .message {
         padding: 0;
         margin-bottom: 5px;
@@ -1451,12 +1495,138 @@ atom-notification {
         margin: 0;
         font-size: 12px;
         background-color: transparent;
-        color: rgba(255,255,255,0.6);
+        color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08)));
         .stack-toggle {
-          color: rgba(255,255,255,0.6);
+          margin-top: 5px;
+          color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08)));
           .icon::before {
             font-size: 12px;
             margin-right: 3px;
+          }
+        }
+        .stack-container {
+          margin: 0;
+          margin-left: 20px;
+        }
+      }
+      .meta {
+        padding: 0;
+        color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08)));
+        margin-top: 5px;
+        margin-bottom: 5px;
+        border: none;
+      }
+    }
+  }
+}
+.atom-dock-inner.left .tab-bar {
+  display: none;
+}
+.tree-view {
+  .full-menu.list-tree {
+    margin-left: 14px;
+    padding-left: 6px;
+    min-width: 0;
+  }
+  .selected::before {
+    background-color: fade(fade(rgba(255,255,255,1), 0), (100 * (alpha(fade(rgba(255,255,255,1), 0)) + 0.06)));
+    border-radius: 10px;
+  }
+  font-size: 12px;
+  .project-root {
+    & > .header {
+      font-size: 13px;
+      margin-top: 12px;
+      font-weight: 600 !important;
+    }
+  }
+  .file.list-item, .directory {
+    > .name {
+      color: rgba(255,255,255,0.6);
+    }
+    > .header {
+      .name {
+        color: rgba(255,255,255,0.6);
+      }
+      &::before {
+        color: rgba(255,255,255,0.6);
+      }
+    }
+    &.list-item.header::before {
+      opacity: alpha(rgba(255,255,255,0.6));
+    }
+    .name::before {
+      opacity: alpha(rgba(255,255,255,0.6));
+    }
+    &.status-modified {
+      > .name {
+        color: fade(#fbd971, (100 * alpha(rgba(255,255,255,0.6))));
+      }
+      > .header {
+        .name {
+          color: fade(#fbd971, (100 * alpha(rgba(255,255,255,0.6))));
+        }
+        &::before {
+          color: fade(#fbd971, (100 * alpha(rgba(255,255,255,0.6))));
+        }
+      }
+    }
+    &.status-added {
+      > .name {
+        color: fade(#eafe5e, (100 * alpha(rgba(255,255,255,0.6))));
+      }
+      > .header {
+        .name {
+          color: fade(#eafe5e, (100 * alpha(rgba(255,255,255,0.6))));
+        }
+        &::before {
+          color: fade(#eafe5e, (100 * alpha(rgba(255,255,255,0.6))));
+        }
+      }
+    }
+    &:not(.opened) {
+      &, & > div.header {
+        > .name {
+          color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5)));
+        }
+        > .header {
+          .name {
+            color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5)));
+          }
+          &::before {
+            color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5)));
+          }
+        }
+        &.list-item.header::before {
+          opacity: alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))));
+        }
+        .name::before {
+          opacity: alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))));
+        }
+        &.status-modified {
+          > .name {
+            color: fade(#fbd971, (100 * alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))))));
+          }
+          > .header {
+            .name {
+              color: fade(#fbd971, (100 * alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))))));
+            }
+            &::before {
+              color: fade(#fbd971, (100 * alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))))));
+            }
+          }
+        }
+        &.status-added {
+          > .name {
+            color: fade(#eafe5e, (100 * alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))))));
+          }
+          > .header {
+            .name {
+              color: fade(#eafe5e, (100 * alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))))));
+            }
+            &::before {
+              color: fade(#eafe5e, (100 * alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))))));
+            }
           }
         }
       }
