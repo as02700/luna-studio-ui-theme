@@ -10,7 +10,8 @@ atom-workspace {
 .settings-view {
   .config-menu {
     position: relative;
-    margin-left: 40px;
+    margin-left: 28px;
+    margin-right: 28px;
     min-width: 168px;
     max-width: 240px;
     background: none;
@@ -20,12 +21,12 @@ atom-workspace {
       border-radius: 8px;
       &:hover {
         .icon {
-          color: fade(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4))), (100 * (alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4)))) + 0.04)));
+          color: fade(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4))), (100 * (alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4)))) * 1.8)));
           &::before {
-            color: fade(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4))), (100 * (alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4)))) + 0.04)));
+            color: fade(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4))), (100 * (alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4)))) * 1.8)));
           }
         }
-        background-color: fade(fade(rgba(255,255,255,1), 0), (100 * (alpha(fade(rgba(255,255,255,1), 0)) + 0.04)));
+        background-color: fade(fade(rgba(255,255,255,1), 0), (100 * (alpha(fade(rgba(255,255,255,1), 0)) * 1.8)));
       }
       &.active {
         &, &:hover {
@@ -35,7 +36,7 @@ atom-workspace {
               color: rgba(255,255,255,0.6);
             }
           }
-          background: fade(fade(rgba(255,255,255,1), 0), (100 * (alpha(fade(rgba(255,255,255,1), 0)) + 0.06)));
+          background: fade(fade(rgba(255,255,255,1), 0), (100 * (alpha(fade(rgba(255,255,255,1), 0)) + 0.05)));
         }
       }
       .icon {
@@ -62,16 +63,17 @@ atom-workspace {
     .button-area {
       margin: 0;
       .btn {
+        padding: 0;
         white-space: initial;
         text-align: left;
-        padding: 0;
         margin-left: 20px;
         line-height: 52px;
         background: none;
+        width: auto;
         &:hover {
-          color: fade(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4))), (100 * (alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4)))) + 0.04)));
+          color: fade(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4))), (100 * (alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4)))) * 1.8)));
           &::before {
-            color: fade(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4))), (100 * (alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4)))) + 0.04)));
+            color: fade(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4))), (100 * (alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4)))) * 1.8)));
           }
         }
         color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4)));
@@ -92,6 +94,9 @@ atom-workspace {
   }
 }
 .settings-view {
+  .section {
+    margin-right: 20px;
+  }
   .panels-item > .section:first-child {
     margin-top: 5px;
   }
@@ -100,7 +105,6 @@ atom-workspace {
   }
   .section {
     padding: 0 !important;
-    margin: 48px;
     .section-container {
       max-width: 600px;
     }
@@ -150,6 +154,35 @@ atom-workspace {
   }
 }
 .settings-view {
+  .collapsed {
+    .section-heading, .sub-section-heading {
+      &.icon.has-items {
+        &::after {
+          color: fade(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))), (100 * (alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5)))) * 0.5)));
+        }
+      }
+    }
+  }
+  .section-heading, .sub-section-heading {
+    &.icon.has-items {
+      display: flex;
+      align-items: center;
+      &::after {
+        font-family: 'Octicons Regular';
+        content: "\f04e";
+        color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5)));
+        font-size: 28px;
+        width: auto;
+        height: auto;
+        &:hover {
+          color: fade(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))), (100 * (alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5)))) * 1.8)));
+          transition: color 1s;
+        }
+      }
+    }
+  }
+}
+.settings-view {
   .control-group {
     margin-top: 18px !important;
     margin-bottom: 18px !important;
@@ -183,13 +216,14 @@ atom-workspace {
     border: 0;
     border-radius: 0;
     padding: 19px;
-    background: rgba(255,255,255,0.05);
+    background: fade(rgba(255,255,255,0.05), (100 * (alpha(rgba(255,255,255,0.05)) * 0.7)));
     margin-bottom: 3px;
+    font-size: 12px;
     &:hover {
-      background: fade(rgba(255,255,255,0.05), (100 * (alpha(rgba(255,255,255,0.05)) + 0.04)));
+      background: fade(fade(rgba(255,255,255,0.05), (100 * (alpha(rgba(255,255,255,0.05)) * 0.7))), (100 * (alpha(fade(rgba(255,255,255,0.05), (100 * (alpha(rgba(255,255,255,0.05)) * 0.7)))) * 1.8)));
     }
     &.disabled {
-      background: fade(rgba(255,255,255,0.05), (100 * (alpha(rgba(255,255,255,0.05)) * 0.5)));
+      background: fade(fade(rgba(255,255,255,0.05), (100 * (alpha(rgba(255,255,255,0.05)) * 0.7))), (100 * (alpha(fade(rgba(255,255,255,0.05), (100 * (alpha(rgba(255,255,255,0.05)) * 0.7)))) * 0.5)));
     }
     .package-description {
       display: block;
@@ -208,6 +242,8 @@ atom-workspace {
     .package-version {
       margin-left: 12px;
       color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4)));
+      font-size: 12px;
+      font-weight: normal;
     }
     .meta-user {
       display: none;
@@ -217,12 +253,10 @@ atom-workspace {
     }
     .package-description {
       color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5)));
-      font-size: 12px;
     }
     .stats {
       .value {
         color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4)));
-        font-size: 12px;
       }
     }
     .stats {
@@ -236,6 +270,12 @@ atom-workspace {
           margin-right: 5px;
           vertical-align: middle;
         }
+        line-height: normal;
+      }
+    }
+    .stats {
+      .stats-item {
+        line-height: normal;
       }
     }
     .btn-toolbar {
@@ -248,6 +288,9 @@ atom-workspace {
         }
         &:hover {
           color: rgba(255,255,255,0.6);
+          &::before {
+            color: rgba(255,255,255,0.6);
+          }
         }
         &.install-button {
           color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08)));
@@ -298,7 +341,7 @@ atom-workspace {
     }
     .breadcrumb {
       padding: 0;
-      margin-left: 48px;
+      margin-left: 20px;
       margin-top: 4px;
       margin-bottom: 4px;
     }
@@ -336,7 +379,7 @@ atom-workspace {
       }
     }
     tr:nth-child(even) {
-      background-color: fade(rgba(255,255,255,0.05), (100 * (alpha(rgba(255,255,255,0.05)) * 0.5)));
+      background-color: fade(rgba(255,255,255,0.05), (100 * (alpha(rgba(255,255,255,0.05)) * 0.7)));
     }
   }
 }
@@ -346,15 +389,18 @@ atom-workspace {
       margin-top: 36px;
       .control-group {
         line-height: 100%;
-        margin: 1.5px !important;
+        margin: 1px !important;
         .setting-description {
           display: none;
         }
         .controls {
+          .form-control {
+            border: 0;
+          }
           .control-label {
             display: inline-block;
             float: left;
-            width: 150px;
+            width: 120px;
             .text {
               font-weight: normal;
               margin: 0;
@@ -441,17 +487,21 @@ atom-text-editor[mini] {
     color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4)));
   }
 }
-.form-control {
-  option {
-    background-color: rgb(((alpha(rgba(255,255,255,0.05)) * red(rgba(255,255,255,0.05))) + red(@base-background-color)), ((alpha(rgba(255,255,255,0.05)) * green(rgba(255,255,255,0.05))) + green(@base-background-color)), ((alpha(rgba(255,255,255,0.05)) * blue(rgba(255,255,255,0.05))) + blue(@base-background-color))) !important;
-  }
-  border: 0;
-  font-size: 15px;
-  padding-top: 0;
-  padding-bottom: 0;
-  border-radius: 20px;
-  &, &:active, &:hover {
-    background: rgba(255,255,255,0.05) !important;
+.settings-view {
+  select.form-control {
+    option {
+      background-color: rgb(((alpha(rgba(255,255,255,0.05)) * red(rgba(255,255,255,0.05))) + red(@base-background-color)), ((alpha(rgba(255,255,255,0.05)) * green(rgba(255,255,255,0.05))) + green(@base-background-color)), ((alpha(rgba(255,255,255,0.05)) * blue(rgba(255,255,255,0.05))) + blue(@base-background-color))) !important;
+    }
+    border: 0;
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    padding-top: 0;
+    padding-bottom: 0;
+    border-radius: 20px;
+    border-right: 8px solid transparent;
+    &, &:active, &:hover {
+      background: rgba(255,255,255,0.05) !important;
+    }
   }
 }
 .settings-view {
@@ -532,6 +582,7 @@ atom-text-editor[mini] {
     margin-top: 10px;
     margin-bottom: 10px;
     .label {
+      font-size: 12px;
       color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))) !important;
     }
     .input-range {
@@ -603,17 +654,24 @@ atom-text-editor[mini] {
     font-size: inherit;
     line-height: 36px;
     background-color: none;
-    color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5)));
+    color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.4)));
     transition: color 0.3s;
     .icon::before {
+      margin-right: 6px !important;
       position: inherit;
-      opacity: alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))));
       transition: opacity 0.3s;
     }
     .title {
       margin: 0 10px;
     }
+    &:not(.active) .title::before {
+      color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.25)));
+    }
+    .title:not(.icon-tools)::before {
+      display: none;
+    }
     .title {
+      text-align: center;
       font-size: 13px;
       &::before {
         margin-right: 4px;
@@ -1316,7 +1374,7 @@ atom-workspace > .horizontal > .vertical {
 }
 atom-text-editor .gutter .line-number {
   opacity: 1;
-  color: fade(rgba(255,255,255,0.6), 20);
+  color: fade(rgba(255,255,255,0.6), 13);
   margin-left: 10px;
   transition: color 0.3s;
   &.cursor-line {
@@ -1326,19 +1384,19 @@ atom-text-editor .gutter .line-number {
   &.git-line-added {
     transition: color 0.3s;
     border-left: 2px solid transparent;
-    color: fade(#eafe5e, 50);
+    color: fade(#eafe5e, 40);
     &.cursor-line {
       transition: color 0.3s;
-      color: fade(#eafe5e, 80);
+      color: fade(#eafe5e, 60);
     }
   }
   &.git-line-modified {
     transition: color 0.3s;
     border-left: 2px solid transparent;
-    color: fade(#fbd971, 50);
+    color: fade(#fbd971, 40);
     &.cursor-line {
       transition: color 0.3s;
-      color: fade(#fbd971, 80);
+      color: fade(#fbd971, 60);
     }
   }
   &.git-line-removed:before {
@@ -1420,101 +1478,144 @@ atom-text-editor atom-text-editor-minimap {
     background-clip: content-box;
   }
 }
-atom-notifications atom-notification {
-  &.error {
+atom-notifications {
+  padding-right: 0;
+  & > :first-child {
     &.icon::before {
-      background-color: mix(rgba(0,0,0,1), #d13b2e, 20);
+      border-top-left-radius: 15px !important;
     }
     .content {
-      background-color: mix(rgba(0,0,0,1), #d13b2e, 20);
+      border-top-right-radius: 15px !important;
     }
   }
-  &.fatal {
+  & > :last-child {
     &.icon::before {
-      background-color: mix(rgba(0,0,0,1), #d13b2e, 20);
+      border-bottom-left-radius: 15px !important;
     }
     .content {
-      background-color: mix(rgba(0,0,0,1), #d13b2e, 20);
+      border-bottom-right-radius: 15px !important;
     }
   }
-  &.warning {
-    &.icon::before {
-      background-color: mix(rgba(0,0,0,1), #e29433, 20);
+  atom-notification {
+    &.error {
+      &.icon::before {
+        background-color: mix(rgba(0,0,0,1), #992e2e, 20);
+      }
+      .content {
+        background-color: mix(rgba(0,0,0,1), #992e2e, 20);
+      }
     }
-    .content {
-      background-color: mix(rgba(0,0,0,1), #e29433, 20);
+    &.fatal {
+      &.icon::before {
+        background-color: mix(rgba(0,0,0,1), #992e2e, 20);
+      }
+      .content {
+        background-color: mix(rgba(0,0,0,1), #992e2e, 20);
+      }
     }
-  }
-  &.info {
-    &.icon::before {
-      background-color: mix(rgba(0,0,0,1), #339ae2, 24);
+    &.warning {
+      &.icon::before {
+        background-color: mix(rgba(0,0,0,1), #b35e2f, 20);
+      }
+      .content {
+        background-color: mix(rgba(0,0,0,1), #b35e2f, 20);
+      }
     }
-    .content {
-      background-color: mix(rgba(0,0,0,1), #339ae2, 24);
+    &.info {
+      &.icon::before {
+        background-color: mix(rgba(0,0,0,1), #41768b, 20);
+      }
+      .content {
+        background-color: mix(rgba(0,0,0,1), #41768b, 20);
+      }
     }
-  }
-  &.success {
-    &.icon::before {
-      background-color: mix(rgba(0,0,0,1), #a7cb30, 20);
+    &.success {
+      &.icon::before {
+        background-color: mix(rgba(0,0,0,1), #8ba33b, 35);
+      }
+      .content {
+        background-color: mix(rgba(0,0,0,1), #8ba33b, 35);
+      }
     }
-    .content {
-      background-color: mix(rgba(0,0,0,1), #a7cb30, 20);
-    }
-  }
-  &.error, &.fatal, &.warning, &.info, &.success {
-    &::before {
-      padding-top: 12px;
-      width: 40px !important;
-      border-radius: 15px 0 0 15px;
-    }
-    .btn.close-all {
-      border: 0;
-      color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08)));
-      background-color: fade(rgba(255,255,255,0.05), (100 * (alpha(rgba(255,255,255,0.05)) + 0.08)));
+    .btn {
+      border: 0 !important;
+      color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08))) !important;
+      background-color: fade(rgba(255,255,255,0.05), (100 * (alpha(rgba(255,255,255,0.05)) + 0.08))) !important;
       &:hover {
-        color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08)));
-        background-color: fade(fade(rgba(255,255,255,0.05), (100 * (alpha(rgba(255,255,255,0.05)) + 0.08))), (100 * (alpha(fade(rgba(255,255,255,0.05), (100 * (alpha(rgba(255,255,255,0.05)) + 0.08)))) + 0.08)));
+        color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08))) !important;
+        background-color: fade(fade(rgba(255,255,255,0.05), (100 * (alpha(rgba(255,255,255,0.05)) + 0.08))), (100 * (alpha(fade(rgba(255,255,255,0.05), (100 * (alpha(rgba(255,255,255,0.05)) + 0.08)))) + 0.08))) !important;
       }
     }
-    .close.icon {
-      color: rgba(255,255,255,1);
-    }
-    .content {
-      padding: 10px;
-      border-radius: 0 15px 15px 0;
-      color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08)));
-      .message {
-        padding: 0;
-        margin-bottom: 5px;
-        font-size: 13px;
-        font-weight: 800;
+    border-top: 0;
+    margin: 0;
+    &.error, &.fatal, &.warning, &.info, &.success {
+      &.icon::before {
+        padding-top: 12px;
+        width: 40px !important;
+        border-radius: 0;
+        border: 3px solid @base-background-color;
+        border-top: 0;
+        border-right: 0;
+        color: rgba(255,255,255,0.6);
       }
-      .detail {
-        padding: 0;
-        border: 0;
-        margin: 0;
-        font-size: 12px;
-        background-color: transparent;
+      .close.icon {
+        opacity: 1;
+        color: rgba(255,255,255,0.6);
+        &:hover {
+          color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 1.8)));
+        }
+      }
+      .content {
+        padding: 10px;
+        border-radius: 0;
+        border: 3px solid @base-background-color;
+        border-top: 0;
         color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08)));
-        .stack-toggle {
-          margin-top: 5px;
-          color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08)));
-          .icon::before {
-            font-size: 12px;
-            margin-right: 3px;
+        .message {
+          padding-left: 0;
+          padding-top: 0;
+          padding-bottom: 0;
+          margin-bottom: 5px;
+          font-size: 13px;
+          font-weight: 800;
+          code {
+            background-color: transparent;
+            color: rgba(255,255,255,0.6);
           }
         }
-        .stack-container {
+        .detail {
+          padding: 0;
+          border: 0;
           margin: 0;
-          margin-left: 20px;
+          font-size: 12px;
+          background-color: transparent;
+          color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08)));
+          .stack-toggle {
+            margin-top: 5px;
+            color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08)));
+            .icon::before {
+              font-size: 12px;
+              margin-right: 3px;
+            }
+          }
+          .stack-container {
+            margin: 0;
+            margin-left: 20px;
+          }
+        }
+        .meta {
+          padding: 0;
+          color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08)));
+          margin-top: 5px;
+          margin-bottom: 5px;
+          border: none;
         }
       }
-      .meta {
-        padding: 0;
-        color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08)));
-        margin-top: 5px;
-        margin-bottom: 5px;
-        border: none;
+      .description a {
+        font-style: italic;
+      }
+      a {
+        color: rgba(255,255,255,0.6);
       }
     }
   }
@@ -1523,13 +1624,14 @@ atom-notifications atom-notification {
   display: none;
 }
 .tree-view {
+  overflow-x: hidden;
   .full-menu.list-tree {
     margin-left: 14px;
     padding-left: 6px;
     min-width: 0;
   }
   .selected::before {
-    background-color: fade(fade(rgba(255,255,255,1), 0), (100 * (alpha(fade(rgba(255,255,255,1), 0)) + 0.06)));
+    background-color: fade(fade(rgba(255,255,255,1), 0), (100 * (alpha(fade(rgba(255,255,255,1), 0)) + 0.05)));
     border-radius: 10px;
   }
   font-size: 12px;
@@ -1540,96 +1642,97 @@ atom-notifications atom-notification {
       font-weight: 600 !important;
     }
   }
-  .file.list-item, .directory {
-    > .name {
+  &:not(:hover) .entry:not(.opened) {
+    .name {
       color: rgba(255,255,255,0.6);
     }
-    > .header {
-      .name {
+    &.status-modified {
+      > .name, > .header .name, > .header .name::before, > .header::before {
         color: rgba(255,255,255,0.6);
       }
+    }
+    &.status-added {
+      > .name, > .header .name, > .header .name::before, > .header::before {
+        color: rgba(255,255,255,0.6);
+      }
+    }
+    .icon {
       &::before {
         color: rgba(255,255,255,0.6);
       }
     }
-    &.list-item.header::before {
-      opacity: alpha(rgba(255,255,255,0.6));
-    }
-    .name::before {
-      opacity: alpha(rgba(255,255,255,0.6));
+  }
+  .entry {
+    .name {
+      color: rgba(255,255,255,0.6);
     }
     &.status-modified {
-      > .name {
+      > .name, > .header .name, > .header .name::before, > .header::before {
         color: fade(#fbd971, (100 * alpha(rgba(255,255,255,0.6))));
-      }
-      > .header {
-        .name {
-          color: fade(#fbd971, (100 * alpha(rgba(255,255,255,0.6))));
-        }
-        &::before {
-          color: fade(#fbd971, (100 * alpha(rgba(255,255,255,0.6))));
-        }
       }
     }
     &.status-added {
-      > .name {
+      > .name, > .header .name, > .header .name::before, > .header::before {
         color: fade(#eafe5e, (100 * alpha(rgba(255,255,255,0.6))));
       }
-      > .header {
-        .name {
-          color: fade(#eafe5e, (100 * alpha(rgba(255,255,255,0.6))));
-        }
-        &::before {
-          color: fade(#eafe5e, (100 * alpha(rgba(255,255,255,0.6))));
-        }
+    }
+    .default-icon, .icon-file-directory {
+      &::before {
+        color: rgba(255,255,255,1);
       }
     }
-    &:not(.opened) {
-      &, & > div.header {
-        > .name {
-          color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5)));
-        }
-        > .header {
-          .name {
-            color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5)));
-          }
-          &::before {
-            color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5)));
-          }
-        }
-        &.list-item.header::before {
-          opacity: alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))));
-        }
-        .name::before {
-          opacity: alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))));
-        }
-        &.status-modified {
-          > .name {
-            color: fade(#fbd971, (100 * alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))))));
-          }
-          > .header {
-            .name {
-              color: fade(#fbd971, (100 * alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))))));
-            }
-            &::before {
-              color: fade(#fbd971, (100 * alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))))));
-            }
-          }
-        }
-        &.status-added {
-          > .name {
-            color: fade(#eafe5e, (100 * alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))))));
-          }
-          > .header {
-            .name {
-              color: fade(#eafe5e, (100 * alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))))));
-            }
-            &::before {
-              color: fade(#eafe5e, (100 * alpha(fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5))))));
-            }
-          }
-        }
-      }
+  }
+  .icon::before {
+    opacity: (0.9 * alpha(rgba(255,255,255,0.6)));
+  }
+  &:not(:hover) {
+    .entry.directory .header, .entry.file .name {
+      opacity: 0.25;
     }
+  }
+  &:hover {
+    .entry.directory .header, .entry.file .name {
+      opacity: 0.4;
+    }
+  }
+  .entry.opened {
+    > .name, > .header {
+      opacity: 1 !important;
+    }
+  }
+  .entry {
+    .header, .header::before {
+      transition: color 0.2s, opacity 0.2s;
+    }
+    .name {
+      transition: color 0.2s, opacity 0.2s;
+    }
+  }
+  .name::before {
+    transition: color 0.2s;
+  }
+}
+.terminal-view {
+  .standard {
+    background-color: transparent;
+    color: rgba(255,255,255,0.6);
+  }
+}
+.status-bar {
+  status-bar-file {
+    display: none;
+  }
+  status-bar-cursor {
+    display: none;
+  }
+  status-bar-selection {
+    display: none;
+  }
+  status-bar-launch-mode {
+    display: none;
+  }
+  font-size: 12px;
+  &, a {
+    color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5)));
   }
 }
