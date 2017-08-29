@@ -1,6 +1,10 @@
 
+@import "variables.less";
 @import "ui-variables-custom.less"; // import colors and custom variables
 @import "fonts/roboto";
+
+
+// @import (less) "style.css";
 
 // ONE dark UI variables
 // ----------------------------------------------
@@ -51,11 +55,11 @@
 @background-color-highlight: lighten(@base-background-color, 4%);
 @background-color-selected:  lighten(@base-background-color, 8%);
 
-@app-background-color: @base-background-color;//level-3-color;
+@app-background-color: #ff0000; //@base-background-color;//level-3-color;
 
 
 // Base -----------------
-@base-background-color: @ui-bg;
+@base-background-color: @bgColor; 
 @base-border-color:     @ui-border;
 
 

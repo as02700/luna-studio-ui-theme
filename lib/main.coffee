@@ -69,10 +69,10 @@ module.exports =
       if entry
         entry.classList.add 'open'
       else
-        console.debug "Resonance-UI: Add: Not found entry for ", filePath
+        console.debug "Luna-UI: Add: Not found entry for ", filePath
 
     treeListAddOpen = (event) =>
-      console.debug "Resonance-UI: treeListAddOpen"
+      console.debug "Luna-UI: treeListAddOpen"
       console.log (event)
       if @treeView
         markOpen event.textEditor

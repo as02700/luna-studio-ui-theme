@@ -5,7 +5,7 @@ html {
   font-size: 12px;
 }
 atom-workspace {
-  background-color: @base-background-color;
+  background-color: @ui-bg;
 }
 .settings-view {
   .config-menu {
@@ -490,7 +490,7 @@ atom-text-editor[mini] {
 .settings-view {
   select.form-control {
     option {
-      background-color: rgb(((alpha(rgba(255,255,255,0.05)) * red(rgba(255,255,255,0.05))) + red(@base-background-color)), ((alpha(rgba(255,255,255,0.05)) * green(rgba(255,255,255,0.05))) + green(@base-background-color)), ((alpha(rgba(255,255,255,0.05)) * blue(rgba(255,255,255,0.05))) + blue(@base-background-color))) !important;
+      background-color: rgb(((alpha(rgba(255,255,255,0.05)) * red(rgba(255,255,255,0.05))) + red(@ui-bg)), ((alpha(rgba(255,255,255,0.05)) * green(rgba(255,255,255,0.05))) + green(@ui-bg)), ((alpha(rgba(255,255,255,0.05)) * blue(rgba(255,255,255,0.05))) + blue(@ui-bg))) !important;
     }
     border: 0;
     font-size: 12px;
@@ -699,7 +699,7 @@ atom-text-editor[mini] {
       transform: scale(0);
       color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) * 0.5)));
       transition-duration: 0.1s;
-      background: @base-background-color;
+      background: @ui-bg;
       &::before {
         color: fade(@accent-color, 70);
       }
@@ -1153,7 +1153,7 @@ atom-workspace {
   box-shadow: -4px -1px 0 0 mix(@accent-color, rgba(0,0,0,1), 50), -4px -4px 0 0 mix(@accent-color, rgba(0,0,0,1), 50);
   .inset-panel {
     z-index: 100;
-    background: @base-background-color;
+    background: @ui-bg;
     box-shadow: 4px -4px 0 0 mix(@accent-color, rgba(0,0,0,1), 50);
   }
   .item-views {
@@ -1421,7 +1421,7 @@ atom-text-editor atom-text-editor-minimap {
     transition: opacity 0.2s;
   }
   .minimap-visible-area {
-    box-shadow: 0 0 0 10000px fade(@base-background-color, 75);
+    box-shadow: 0 0 0 10000px fade(@ui-bg, 75);
     &::after {
       background-color: transparent;
     }
@@ -1553,7 +1553,7 @@ atom-notifications {
         padding-top: 12px;
         width: 40px !important;
         border-radius: 0;
-        border: 3px solid @base-background-color;
+        border: 3px solid @ui-bg;
         border-top: 0;
         border-right: 0;
         color: rgba(255,255,255,0.6);
@@ -1568,7 +1568,7 @@ atom-notifications {
       .content {
         padding: 10px;
         border-radius: 0;
-        border: 3px solid @base-background-color;
+        border: 3px solid @ui-bg;
         border-top: 0;
         color: fade(rgba(255,255,255,0.6), (100 * (alpha(rgba(255,255,255,0.6)) + 0.08)));
         .message {

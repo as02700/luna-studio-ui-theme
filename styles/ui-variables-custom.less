@@ -40,9 +40,10 @@
 .ui-fg_() when (default())        { @ui-fg: hsla(@ui-hue, min(@ui-saturation, 18%), 1, max(@ui-lightness*3, 60%));}
 .ui-fg_();
 
-.ui-bg_() when (@cfg-bg = "auto") { @ui-bg: hsl(@ui-hue, @ui-saturation, @ui-lightness); }
-.ui-bg_() when (default())        { @ui-bg: @cfg-bg;                                     }
-.ui-bg_();
+@ui-bg: @syntax-background-color;
+// .ui-bg_() when (@cfg-bg = "auto") { @ui-bg: hsl(@ui-hue, @ui-saturation, @ui-lightness); }
+// .ui-bg_() when (default())        { @ui-bg: @cfg-bg;                                     }
+// .ui-bg_();
 
 // @ui-bg: @syntax-background-color;
 // @ui-border: darken(@ui-bg,0%); //hsl(@ui-hue, @ui-saturation, @ui-lightness-border);
