@@ -1,7 +1,7 @@
 fs   = require 'fs'
 path = require 'path'
 {CompositeDisposable} = require 'atom'
-root = document.documentElement
+# root = document.documentElement
 
 `
 function componentToHex(c) {
@@ -17,7 +17,10 @@ function rgbToHex(r, g, b) {
 
 module.exports =
   getConfigVariablesPath: ->
-    path.join __dirname, "..", "styles", "config-variables.less"
+    basePath = path.join __dirname, '..', 'styles', 'generated'
+    if not fs.existsSync basePath
+      fs.mkdir basePath
+    path.join basePath, "globals.less"
 
   getConfigVariablesContent: () ->
     """
@@ -30,17 +33,13 @@ module.exports =
   activate: (state) ->
     @packageName = require('../package.json').name
 
-    atom.config.observe 'luna-dark-ui.fontSize', (value) ->
-      setFontSize(value)
-
-    atom.config.observe 'luna-dark-ui.tabSizing', (value) ->
-      setTabSizing(value)
-
-    atom.config.observe 'luna-dark-ui.hideDockButtons', (value) ->
-      setHideDockButtons(value)
 
     foo = this
-    atom.config.observe 'luna-dark-ui.backgroundColor', (value) ->
+    atom.config.observe (@packageName + '.backgroundColor'), (value) ->
+      v = value
+      if value == 'auto'
+        v = "\"#{value}\""
+
       rgbPattern  = ///^(\#[0-9a-fA-F]{6})$///
       lessPattern = ///^`(.*)`///
       match  = (value.match rgbPattern) || (value.match lessPattern)
@@ -50,10 +49,6 @@ module.exports =
         foo.refreshTheme()
       else console.debug "Text '#{value}' is not a valid config value."
 
-    # DEPRECATED: This can be removed at some point (added in Atom 1.17/1.18ish)
-    # It removes `layoutMode`
-    if atom.config.get('luna-dark-ui.layoutMode')
-      atom.config.unset('luna-dark-ui.layoutMode')
 
 
 
@@ -113,71 +108,73 @@ module.exports =
     # Options.apply()
 
   deactivate: ->
-    unsetFontSize()
-    unsetTabSizing()
-    unsetHideDockButtons()
     @disposables.dispose()
 
   config:
-    fontSize:
-      type:    ['integer', 'string']
-      minimum: 8
-      maximum: 20
-      default: 'Auto'
-      order:   1
-    tabSizing:
-      type:    'string'
-      default: 'Even'
-      enum:    ['Even', 'Maxinmum', 'Minimum']
-      order:   2
-    hideDockButtons:
-      type:    'boolean'
-      default: 'false'
-      order:   3
-    someSetting:
-      type: 'array'
-      default: [1, 2, 3]
-      items:
-        type: 'integer'
-        minimum: 1.5
-        maximum: 11.5
-      order:   4
     backgroundColor:
-      type: 'string'
-      default: 'auto'
-      order:   5
+      order   : 1
+      description: 'WARNING: Changing this option could take several seconds, depending on how powerful the machine you are currently running is. It is an exported variable and could be used by any other package, so all already loaded styles have to be reloaded.'
+      type    : 'string'
+      default : 'inherit'
+      enum    : [
+        {value: 'inherit', description: 'Inherit from syntax theme'}
+        {value: 'custom' , description: 'Custom'}
+      ]
+    customBackgroundColor:
+      order   : 2
+      type    : 'color'
+      default : 'black'
+    contrast:
+      description: 'Contrast of all theme elements. Increasing this value would make theme more readable but will also make your eyes hurt more.'
+      order   : 3
+      type    : 'string'
+      default : 'auto'
+      enum    : [
+        {value: 'auto', description: 'Automatic, depending on the theme\'s lightness'}
+        {value: '8' , description: 'Very Slight'}
+        {value: '8' , description: 'Slight'}
+        {value: '8' , description: 'Medium'}
+        {value: '8' , description: 'Medium'}
+        {value: '8' , description: 'Strong'}
+        {value: '8' , description: 'Very Strong'}
+        {value: '8' , description: 'Custom'}
+      ]
+    customContrast:
+      order   : 4
+      type    : 'number'
+      default : 1.0
 
 
 # Font Size -----------------------
-
-setFontSize = (currentFontSize) ->
-  if Number.isInteger(currentFontSize)
-    root.style.fontSize = "#{currentFontSize}px"
-  else if currentFontSize is 'Auto'
-    unsetFontSize()
-
-unsetFontSize = ->
-  root.style.fontSize = ''
-
-
-# Tab Sizing -----------------------
-
-setTabSizing = (tabSizing) ->
-  root.setAttribute('theme-one-dark-ui-tabsizing', tabSizing.toLowerCase())
-
-unsetTabSizing = ->
-  root.removeAttribute('theme-one-dark-ui-tabsizing')
-
-
-# Dock Buttons -----------------------
-
-setHideDockButtons = (hideDockButtons) ->
-  if hideDockButtons
-    root.setAttribute('theme-one-dark-ui-dock-buttons', 'hidden')
-  else
-    unsetHideDockButtons()
-
-
-
-unsetHideDockButtons = ->
-  root.removeAttribute('theme-one-dark-ui-dock-buttons')
+#
+# setFontSize = (currentFontSize) ->
+#   if Number.isInteger(currentFontSize)
+#     root.style.fontSize = "#{currentFontSize}px"
+#   else if currentFontSize is 'Auto'
+#     unsetFontSize()
+#
+# unsetFontSize = ->
+#   root.style.fontSize = ''
+#
+#
+# # Tab Sizing -----------------------
+#
+# setTabSizing = (tabSizing) ->
+#   root.setAttribute('theme-one-dark-ui-tabsizing', tabSizing.toLowerCase())
+#
+# unsetTabSizing = ->
+#   root.removeAttribute('theme-one-dark-ui-tabsizing')
+#
+#
+# # Dock Buttons -----------------------
+#
+# setHideDockButtons = (hideDockButtons) ->
+#   if hideDockButtons
+#     root.setAttribute('theme-one-dark-ui-dock-buttons', 'hidden')
+#   else
+#     unsetHideDockButtons()
+#
+#
+#
+# unsetHideDockButtons = ->
+#   root.removeAttribute('theme-one-dark-ui-dock-buttons')
