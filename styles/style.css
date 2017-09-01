@@ -1362,16 +1362,6 @@ atom-workspace {
     }
   }
 }
-atom-workspace > .horizontal > .vertical {
-  .pane {
-    opacity: 0.8;
-    transition: opacity 0.5s;
-  }
-  .pane.active {
-    opacity: 1;
-    transition: opacity 0.5s;
-  }
-}
 atom-text-editor .gutter .line-number {
   opacity: 1;
   color: fade(rgba(255,255,255,0.6), 13);

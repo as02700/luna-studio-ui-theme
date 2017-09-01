@@ -131,12 +131,11 @@ module.exports =
       default : 'auto'
       enum    : [
         {value: 'auto', description: 'Automatic, depending on the theme\'s lightness'}
-        {value: '8' , description: 'Very Slight'}
-        {value: '8' , description: 'Slight'}
-        {value: '8' , description: 'Medium'}
-        {value: '8' , description: 'Medium'}
-        {value: '8' , description: 'Strong'}
-        {value: '8' , description: 'Very Strong'}
+        {value: '0.7' , description: 'Very Slight'}
+        {value: '0.9' , description: 'Slight'}
+        {value: '1.0' , description: 'Normal'}
+        {value: '1.1' , description: 'Strong'}
+        {value: '1.5' , description: 'Very Strong'}
         {value: '8' , description: 'Custom'}
       ]
     customContrast:
