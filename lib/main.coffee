@@ -28,7 +28,7 @@ module.exports =
     """
 
   refreshTheme: () ->
-    fs.writeFileSync @getConfigVariablesPath(), @getConfigVariablesContent()
+    #fs.writeFileSync @getConfigVariablesPath(), @getConfigVariablesContent()
 
   activate: (state) ->
     @packageName = require('../package.json').name
