@@ -51,58 +51,8 @@ module.exports =
 
 
 
-
-
-
-
-
-
-
-    markOpen = (textEditor) =>
-      filePath = textEditor.getPath()
-      entry = @treeView.entryForPath filePath
-      if entry
-        entry.classList.add 'open'
-      else
-        console.debug "Luna-UI: Add: Not found entry for ", filePath
-
-    treeListAddOpen = (event) =>
-      console.debug "Luna-UI: treeListAddOpen"
-      console.log (event)
-      if @treeView
-        markOpen event.textEditor
-
     @disposables = new CompositeDisposable
     @disposables.add atom.workspace.onDidAddTextEditor treeListAddOpen
-
-    atom.packages.activatePackage('tree-view').then (treeViewPkg) =>
-      if not @treeView
-        @treeView = treeViewPkg.mainModule.treeView
-        markOpened = (entry) => if not (entry.classList.contains '.opened')
-            entry.classList.add 'opened'
-            if entry.nodeName == "LI"
-              markOpened entry.parentElement.parentElement
-        refreshAll = =>
-          for entry in @treeView.list.querySelectorAll('.opened')
-            entry?.classList.remove 'opened'
-          for editor in atom.workspace.getTextEditors()
-            fpath = editor.buffer.file?.path
-            entry = @treeView.entryForPath(fpath) if fpath?
-            markOpened entry if entry?
-        @treeView.onDirectoryCreated refreshAll
-        @treeView.onEntryCopied      refreshAll
-        @treeView.onEntryDeleted     refreshAll
-        @treeView.onEntryMoved       refreshAll
-        @treeView.onFileCreated      refreshAll
-        oldEntryClicked = @treeView.entryClicked
-        @treeView.entryClicked = (e) =>
-          oldEntryClicked.call(@treeView, e)
-          refreshAll()
-        atom.workspace.observeTextEditors   refreshAll
-        atom.workspace.onDidDestroyPaneItem refreshAll
-        refreshAll()
-      else
-        console.debug "TreeView Dim: Tree-view already activated"
 
     # @refreshTheme()
     # Options.apply()
