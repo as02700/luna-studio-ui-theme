@@ -52,7 +52,6 @@ module.exports =
 
 
     @disposables = new CompositeDisposable
-    @disposables.add atom.workspace.onDidAddTextEditor treeListAddOpen
 
     # @refreshTheme()
     # Options.apply()
